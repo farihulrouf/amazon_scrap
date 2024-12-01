@@ -1,12 +1,18 @@
-from typing import List  # Add this import at the top of the file
+from typing import List
 import requests
 from app.models.model_video import VideoRequest, VideoResponse
 from fastapi import HTTPException
+from dotenv import load_dotenv
+import os
 
-API_KEY = 'AIzaSyDJowfhPCSG2dwBvSneNCHq5C9XiKMnMCE'
-YOUTUBE_API_URL = 'https://www.googleapis.com/youtube/v3/search'
+# Load environment variables from .env file
+load_dotenv()
 
-def fetch_videos(query: str) -> List[VideoResponse]:  # List should be imported
+# Get the API key from the environment variables
+API_KEY = os.getenv('API_YOUTUBE_KEY')
+YOUTUBE_API_URL = os.getenv('YOUTUBE_API_URL')
+
+def fetch_videos(query: str) -> List[VideoResponse]:
     params = {
         'part': 'snippet',
         'q': query,
