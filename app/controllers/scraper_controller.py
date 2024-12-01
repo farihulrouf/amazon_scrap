@@ -56,11 +56,19 @@ def get_amazon_products(url: str):
         else:
             product_link = None
         
+        # Mengambil harga produk
+        price_tag = product.find('span', class_='a-offscreen')
+        if price_tag:
+            product_price = price_tag.get_text(strip=True)
+        else:
+            product_price = None
+        
         # Simpan data produk dalam dictionary
         product_data = {
             "title": product_title,
             "image_url": img_url,
-            "product_link": product_link
+            "product_link": product_link,
+            "price": product_price
         }
         products.append(product_data)
 
@@ -71,6 +79,6 @@ def get_amazon_products(url: str):
     return {"success": True, "total_items": total_items, "data": products_filtered}
 
 # Uji dengan URL yang Anda berikan
-url = "https://www.amazon.com/s?k=best+2024+laptop+deals&crid=CG1KHU2C4WB2&sprefix=best+2024+laptop%2Caps%2C945&ref=nb_sb_ss_ts-doa-p_1_16"
-result = get_amazon_products(url)
-print(result)
+#url = "https://www.amazon.com/s?k=best+2024+laptop+deals&crid=CG1KHU2C4WB2&sprefix=best+2024+laptop%2Caps%2C945&ref=nb_sb_ss_ts-doa-p_1_16"
+#result = get_amazon_products(url)
+#print(result)
