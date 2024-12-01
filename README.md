@@ -1,4 +1,4 @@
-# YouTube Video Fetcher
+# YouTube Video Fetcher & Scrapre amazon
 
 This project allows you to fetch and display YouTube videos based on a search query. It utilizes the YouTube Data API, FastAPI for the backend, and provides a RESTful endpoint to search for videos related to any query.
 
