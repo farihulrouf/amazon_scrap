@@ -61,11 +61,17 @@ def get_amazon_products(url: str, retries: int = 3, delay: int = 5):
         price_tag = product.find('span', class_='a-offscreen')
         product_price = price_tag.get_text(strip=True) if price_tag else None
         
+        # Extracting coupon text (if available)
+        coupon_tag = product.find('span', class_='s-coupon-clipped aok-hidden')
+        coupon_text_tag = coupon_tag.find('span', class_='a-color-base') if coupon_tag else None
+        coupon_text = coupon_text_tag.get_text(strip=True) if coupon_text_tag else None
+        
         product_data = {
             "title": product_title,
             "image_url": img_url,
             "product_link": product_link,
-            "price": product_price
+            "price": product_price,
+            "coupon_text": coupon_text  # Include coupon text if found
         }
 
         # Filter out products where the price is null
@@ -78,7 +84,3 @@ def get_amazon_products(url: str, retries: int = 3, delay: int = 5):
 
     return {"success": True, "total_items": total_items, "data": products}
 
-# Example usage
-#url = "https://www.amazon.com/s?k=laptop"
-#result = get_amazon_products(url)
-#print(result)
