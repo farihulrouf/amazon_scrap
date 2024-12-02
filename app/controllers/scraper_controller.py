@@ -58,8 +58,20 @@ def get_amazon_products(url: str, retries: int = 3, delay: int = 5):
         link_tag = product.find('a', class_='a-link-normal')
         product_link = 'https://www.amazon.com' + link_tag['href'] if link_tag and 'href' in link_tag.attrs else None
         
-        price_tag = product.find('span', class_='a-offscreen')
-        product_price = price_tag.get_text(strip=True) if price_tag else None
+        # Extracting price from a-price a-text-price
+        price_tag = product.find('span', class_='a-price a-text-price')
+        if price_tag:
+            price_offscreen_tag = price_tag.find('span', class_='a-offscreen')
+            product_price = price_offscreen_tag.get_text(strip=True) if price_offscreen_tag else None
+        else:
+            product_price = None
+        
+        # Extract additional price information
+        additional_price_tag = product.find('span', class_='a-offscreen')
+        if additional_price_tag:
+            additional_price = additional_price_tag.get_text(strip=True)
+        else:
+            additional_price = None
         
         # Extracting coupon text (if available)
         coupon_tag = product.find('span', class_='s-coupon-clipped aok-hidden')
@@ -70,7 +82,8 @@ def get_amazon_products(url: str, retries: int = 3, delay: int = 5):
             "title": product_title,
             "image_url": img_url,
             "product_link": product_link,
-            "price": product_price,
+            "price": product_price,  # Main price from a-price a-text-price
+            "x_price": additional_price,  # Additional price from a-offscreen
             "coupon_text": coupon_text  # Include coupon text if found
         }
 
