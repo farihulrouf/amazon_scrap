@@ -1,19 +1,21 @@
 // src/api/api.js
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL; // Mengambil URL API dari .env
+const API_URL = "http://localhost:8000/api"// Mengambil URL API dari .env
+//console.log("check",process.env); // Memeriksa semua variabel lingkungan
+//console.log("API URL:", process.env.VUE_APP_API_URL);
 
 // API untuk login
-export const login = async (email, password) => {
-  console.log("email and password", email, password)
-  console.log(API_URL)
+export const login = async (username, password) => {
+  console.log("API URL:", API_URL); // Cek apakah URL API sudah benar
   try {
     const response = await axios.post(`${API_URL}/login`, {
-      email,
+      username,
       password,
     });
     return response.data.token; // Kembalikan token JWT
   } catch (error) {
+    console.error(error); // Tambahkan error handling yang lebih lengkap
     throw new Error('Login failed. Please check your credentials.');
   }
 };
