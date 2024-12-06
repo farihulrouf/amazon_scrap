@@ -1,13 +1,19 @@
+
 import motor.motor_asyncio
 from decouple import config
 
-MONGO_URI = config("MONGO_URI")
-DATABASE_NAME = config("MONGO_DB_NAME")
+class Database:
+    def __init__(self):
+        self.client = motor.motor_asyncio.AsyncIOMotorClient(config("MONGO_URI"))
+        self.db = self.client[config("MONGO_DB_NAME")]
 
-# Koneksi ke MongoDB
-client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_URI)
-db = client[DATABASE_NAME]
+    def get_collection(self, collection_name: str):
+        return self.db[collection_name]
 
-# Koleksi
-users_collection = db["users"]
-blogs_collection = db["blogs"]
+# Inisialisasi database
+database = Database()
+
+# Mengakses koleksi dengan mudah
+users_collection = database.get_collection("users")
+blogs_collection = database.get_collection("blogs")
+comments_collection = database.get_collection("comments")

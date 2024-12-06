@@ -3,8 +3,9 @@ from app.controllers.scraper_controller import get_amazon_products
 from app.controllers.video_controller import fetch_videos
 from app.models.model_video import VideoRequest, VideoResponse
 from app.controllers.auth_controller import authenticate_user, require_admin, register_user, RegisterRequest
-from app.controllers.blog_controller import create_blog
+from app.controllers.blog_controller import create_blog, add_comment_to_blog
 from app.models.user_model import LoginRequest, Token, UserResponse
+from app.models.blog_model import BlogResponse, CommentRequest, CreateBlogRequest
 
 from typing import List
 
@@ -23,10 +24,15 @@ async def register(data: RegisterRequest):
     return await register_user(data)
 
 
-# Endpoint untuk menulis blog (dengan otorisasi admin)
-@scraper_router.post("/api/write-blog", dependencies=[Depends(require_admin)])
-async def write_blog(title: str, content: str):
-    return await create_blog(title, content)
+@scraper_router.post("/api/write-blog", dependencies=[Depends(require_admin)], response_model=BlogResponse)
+async def write_blog(blog_data: CreateBlogRequest):
+    return await create_blog(blog_data)
+
+# Endpoint untuk membuat komentar pada blog
+@scraper_router.post("/api/blogs/{blog_id}/comments", response_model=dict)
+async def add_comment(blog_id: str, comment: CommentRequest, token: Token = Depends(authenticate_user)):
+    # Menambahkan komentar ke blog
+    return await add_comment_to_blog(blog_id, token.sub, comment.content)
 
 # Endpoint untuk mendapatkan video
 @scraper_router.post("/api/getvideos", response_model=List[VideoResponse])
