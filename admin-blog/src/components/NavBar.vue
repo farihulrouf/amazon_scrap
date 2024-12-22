@@ -1,20 +1,28 @@
 <template>
-    <header class="bg-white shadow p-4 flex justify-between items-center">
-      <h1 class="text-xl font-semibold">Welcome, User</h1>
-      <div class="flex items-center space-x-4">
-        <input
-          type="text"
-          placeholder="Search..."
-          class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500"
-        />
-        <button class="bg-cyan-500 text-white px-4 py-2 rounded hover:bg-cyan-600">Notifications</button>
+  <div class="w-full bg-teal-800 text-white shadow">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="text-lg font-bold">Navbar Title</div>
+      <nav>
+        <ul class="flex space-x-4">
+          <li v-for="(link, index) in navLinks" :key="index">
+            <a href="#" class="hover:underline">{{ link }}</a>
+          </li>
+        </ul>
+      </nav>
+      <div>
+        <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded">Sign In</button>
       </div>
-    </header>
-  </template>
-  
-  <script>
-  export default {
-    name: "Navbar",
-  };
-  </script>
-  
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Navbar",
+  data() {
+    return {
+      navLinks: ["Home", "About", "Contact"],
+    };
+  },
+};
+</script>

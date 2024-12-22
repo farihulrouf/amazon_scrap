@@ -7,13 +7,13 @@ const API_URL = "http://localhost:8000/api"// Mengambil URL API dari .env
 
 // API untuk login
 export const login = async (username, password) => {
-  console.log("API URL:", API_URL); // Cek apakah URL API sudah benar
+  console.log("API URL:", `${API_URL}/login`); // Cek apakah URL API sudah benar
   try {
     const response = await axios.post(`${API_URL}/login`, {
       username,
       password,
     });
-    return response.data.token; // Kembalikan token JWT
+    return response.data.access_token; // Kembalikan token JWT
   } catch (error) {
     console.error(error); // Tambahkan error handling yang lebih lengkap
     throw new Error('Login failed. Please check your credentials.');

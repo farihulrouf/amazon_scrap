@@ -121,6 +121,9 @@ export default {
         // Menggunakan fungsi login dari api.js
         const token = await login(this.username, this.password);
         console.log('Login successful:', token);
+        localStorage.setItem('token', token);
+        this.$router.push('/layout'); // Redirect ke layout setelah login
+
         // Lakukan navigasi atau aksi setelah login berhasil
       } catch (error) {
         this.error = 'Login failed. Please check your credentials.';

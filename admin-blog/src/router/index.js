@@ -1,24 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Login from '../components/Login.vue';
-import CreatePost from '../components/CreatePost.vue';
+import BlogDetail from '../components/BlogDetail.vue';
 
 const routes = [
   {
-    path: '/',
-    redirect: '/login',  // Rute default yang mengarah ke /login
-  },
-  {
-    path: '/login',
-    component: Login,
-  },
-  {
-    path: '/create-post',
-    component: CreatePost,
+    path: '/blog-detail',
+    name: 'BlogDetail',
+    component: BlogDetail,
   },
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(),
   routes,
 });
 
