@@ -1,9 +1,9 @@
 <template>
     <div class="max-w-screen-xl mx-auto p-6">
-        <div class="grid grid-cols-12 gap-4 mb-4">
+        <div class="grid grid-cols-12 gap-4 mb-2">
             <!-- Blog Title -->
-            <div class="col-span-9 bg-red-500">
-                <h1 class="text-5xl font-bold text-gray-800">{{ blog.title }}</h1>
+            <div class="col-span-9">
+                <h1 class="text-6xl font-bold text-gray-800">{{ blog.title }}</h1>
             </div>
             <!-- Additional Info -->
             <div class="col-span-3 text-sm text-gray-600 text-right">
@@ -14,7 +14,10 @@
                     See our ethics statement.</p>
             </div>
         </div>
-
+        <div class="mb-4">
+            <h2 class="text-3xl">The AMD Strix Point CPU in the Zephyrus G16 gives this gaming laptop a battery life
+                boost over the Intel version. Unfortunately, the price is also boosted.</h2>
+        </div>
         <!-- Blog Image -->
         <img :src="blog.image" :alt="blog.title" class="w-full h-full object-cover rounded-lg mb-6 shadow-lg" />
 
@@ -87,6 +90,40 @@
                         {{ blog.content_r }}
                     </h>
                 </div>
+
+                <div class="max-w-full mb-4 p-4">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Watch This Video</h2>
+                    <div class="aspect-w-16 aspect-h-9">
+                        <iframe width="100%" height="315" src="https://www.youtube.com/embed/lPSxGmrqJzA"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+
+                    </div>
+                </div>
+                <div class="text-gray-700 mb-4 p-4">
+                    <h class="text-lg">
+                        {{ blog.content_f }}
+                    </h>
+                </div>
+                <!-- Product Features Card -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden mt-6">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Product Features</h3>
+                        <ul class="list-disc list-inside text-gray-700">
+                            <li>Powered by the latest AMD Ryzen AI 9 HX 370 CPU</li>
+                            <li>Exceptional 2560 x 1600 OLED display with 240Hz refresh rate</li>
+                            <li>Ultra-lightweight design, only 3.99 pounds</li>
+                            <li>Improved battery life, up to 12 hours with moderate use</li>
+                            <li>RGB backlighting with customizable effects</li>
+                            <li>Wi-Fi 7 for faster and more reliable connectivity</li>
+                            <li>Multiple storage options: 1TB, 2TB SSD</li>
+                            <li>Enhanced cooling system for quieter and more efficient operation</li>
+                            <li>Thin, premium aluminum chassis</li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
             <!-- List of Other Blog Posts -->
             <div class="max-w-sm ml-6">
@@ -110,6 +147,7 @@ export default {
         return {
             blog: {
                 title: "Asus ROG Zephyrus G16 (2024) review: an AMD upgrade",
+                content_f: "Whichever processor and graphics card is inside, using the G16 is a rock-solid experience. There’s very little chassis flex except for the plate in the dead center of the keyboard, the lid lifts easily with a single finger, and screen wobble is minimal. But the 2560 x 1600, 240Hz OLED ROG Nebula Display steals the show. Thanks to the excellent motion clarity, color accuracy, and contrast, it’s just about the best screen you can find on a gaming laptop. The smaller Asus ROG Zephyrus G14 uses a 2880 x 1800 OLED panel, but it’s only 120Hz.",
                 content_r: 'I have a solid basis for comparing the two G16s here. In search of a portable work machine I could also game on, I ditched my desktop and bought the Intel version of the G16, with an RTX 4070 and 16GB of RAM, in August. Since then, I’ve used it not only to work at home and in coffee shops but also to play all the games I’d normally play on my tower.',
                 image: "https://duet-cdn.vox-cdn.com/thumbor/0x0:2040x1360/2400x1600/filters:focal(1239x649:1240x650):format(webp)/cdn.vox-cdn.com/uploads/chorus_asset/file/25696652/DSC_1121_Enhanced_NR.jpg",
                 content: `Asus overhauled its ROG Zephyrus gaming laptops in 2024, giving them sleek, 

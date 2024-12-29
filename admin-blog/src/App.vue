@@ -11,5 +11,5 @@ export default {
 </script>
 
 <style>
-/* styling */
+/* Styling jika diperlukan */
 </style>

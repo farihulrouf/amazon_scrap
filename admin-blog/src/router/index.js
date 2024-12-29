@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import BlogDetail from '../components/BlogDetail.vue';
+import BlogEditor from '../components/BlogEditor.vue';
 
 const routes = [
   {
-    path: '/blog-detail',
-    name: 'BlogDetail',
-    component: BlogDetail,
+    path: '/blog-editor',
+    name: 'BlogEditor',
+    component: BlogEditor,
   },
 ];
 

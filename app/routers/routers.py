@@ -6,6 +6,8 @@ from app.controllers.auth_controller import authenticate_user, require_admin, re
 from app.controllers.blog_controller import create_blog, add_comment_to_blog
 from app.models.user_model import LoginRequest, Token, UserResponse
 from app.models.blog_model import BlogResponse, CommentRequest, CreateBlogRequest
+from app.controllers.post_controller import create_post, get_post_by_id
+from app.models.post_model import PostCreateRequest, PostResponse
 
 from typing import List
 
@@ -23,6 +25,20 @@ async def register(data: RegisterRequest):
     # Panggil controller untuk registrasi
     return await register_user(data)
 
+
+
+
+# Endpoint to create a post (requires admin privileges)
+@scraper_router.post("/api/posts", response_model=PostResponse, dependencies=[Depends(require_admin)])
+async def create_new_post(post_data: PostCreateRequest):
+    return await create_post(post_data)
+# Endpoint to get a post by ID
+@scraper_router.get("/api/posts/{post_id}", response_model=PostResponse)
+async def get_post(post_id: str):
+    """
+    Endpoint to get a specific post by its ID
+    """
+    return await get_post_by_id(post_id)
 
 @scraper_router.post("/api/write-blog", dependencies=[Depends(require_admin)], response_model=BlogResponse)
 async def write_blog(blog_data: CreateBlogRequest):
